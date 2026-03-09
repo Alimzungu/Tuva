@@ -551,9 +551,11 @@
         </div>
     </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <script>
         (function() {
-    emailjs.init("UaiMbspza8YTLxIPr"); // Replace with your EmailJS Public Key
+    emailjs.init("b79O3YBhVbM0xuDjb"); // Replace with your EmailJS Public Key
 })();
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -621,7 +623,7 @@
         message: document.getElementById('message').value
     };
 
-    emailjs.send("service_8ki9t8b", "template_mb4gxua", formData)
+    emailjs.send("service_zvmfrsx", "template_3wq8y47", formData)
         .then(function(response) {
             showModal(
                 'Appointment Requested!',
@@ -637,13 +639,26 @@
         });
 });
         
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Here you would normally send the form data to your server
-            // For this example, we'll just show a success message
-            showModal('Message Sent!', 'Thank you for contacting us. We will get back to you as soon as possible.');
-            contactForm.reset();
-        });
+   
+    contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = {
+        name: document.getElementById('contactName').value,
+        email: document.getElementById('contactEmail').value,
+        subject: document.getElementById('contactSubject').value,
+        message: document.getElementById('contactMessage').value
+    };
+
+    emailjs.send("service_zvmfrsx", "template_vbolcok", formData)
+    .then(function(response) {
+        showModal('Message Sent!', 'Thank you for contacting us. We will get back to you shortly.');
+        contactForm.reset();
+    }, function(error) {
+        showModal('Error!', 'Something went wrong. Please try again.');
+        console.log(error);
+    });
+});
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
